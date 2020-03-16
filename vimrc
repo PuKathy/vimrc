@@ -6,6 +6,7 @@ let mapleader=";"
 source ~/.vim/config/vim-trailing-whitespace.vim
 source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/ctags_tagbar_indexer.vim
+source ~/.vim/config/vim-commentary.vim
 
 " 开启文件类型侦测
 filetype on
@@ -75,4 +76,15 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " 让配置变更立即生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" insert模式下支持退格键删除
+set backspace=indent,eol,start
+
+" vim剪切板和系统剪切板公用
+" vim --version | grep clipboard
+" +y   复制到系统剪贴板
+" +p   粘贴
+" +gp  粘贴并且移动光标到粘贴内容后
+vmap <leader>c "+y
+nmap <leader>v "+gp
