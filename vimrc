@@ -1,4 +1,4 @@
-source ~/.vim/config/plugin.vim
+sourc ~/.vim/config/plugin.vim
 
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
@@ -33,7 +33,9 @@ set wildmenu
 " 需要终端支持对应的配色方案
 " 配色方案
 set background=dark
-colorscheme solarized
+if !has('unix')
+    colorscheme solarized
+endif
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
 
@@ -88,3 +90,10 @@ set backspace=indent,eol,start
 " +gp  粘贴并且移动光标到粘贴内容后
 vmap <leader>c "+y
 nmap <leader>v "+gp
+
+" vimgdb
+helptags ~/.vim/doc
+run macros/gdb_mappings.vim
+set previewheight=50
+set splitright
+
