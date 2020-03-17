@@ -103,4 +103,7 @@ set splitbelow
 set splitright
 
 " Termdebug vim8.1自带的功能
+" 加载termdebug plugin
 packadd termdebug
+" 默认水平分割，添加这个参数竖向分隔窗口
+let g:termdebug_wide=10
