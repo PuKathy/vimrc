@@ -17,11 +17,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/phd'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+" warning deprecated
 " indexer自动调用和更新ctags
 " indexer依赖DfrankUtil和vimprj
-Plugin 'vim-scripts/indexer.tar.gz'
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
+" Plugin 'vim-scripts/indexer.tar.gz'
+" Plugin 'vim-scripts/DfrankUtil'
+" Plugin 'vim-scripts/vimprj'
+
+Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()
 filetype plugin indent on

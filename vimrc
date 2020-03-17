@@ -7,6 +7,7 @@ source ~/.vim/config/vim-trailing-whitespace.vim
 source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/ctags_tagbar_indexer.vim
 source ~/.vim/config/vim-commentary.vim
+source ~/.vim/config/vim-gutentags.vim
 
 " 开启文件类型侦测
 filetype on
@@ -91,9 +92,15 @@ set backspace=indent,eol,start
 vmap <leader>c "+y
 nmap <leader>v "+gp
 
-" vimgdb
+" vimgdb 目前的patch只支持到了vim7.4
 helptags ~/.vim/vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/doc
 run vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/macros/gdb_mappings.vim
 set previewheight=50
 set splitright
 
+" 设置新窗口默认位置
+set splitbelow
+set splitright
+
+" Termdebug vim8.1自带的功能
+packadd termdebug
