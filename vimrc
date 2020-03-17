@@ -92,8 +92,8 @@ vmap <leader>c "+y
 nmap <leader>v "+gp
 
 " vimgdb
-helptags ~/.vim/doc
-run macros/gdb_mappings.vim
+helptags ~/.vim/vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/doc
+run vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/macros/gdb_mappings.vim
 set previewheight=50
 set splitright
 
