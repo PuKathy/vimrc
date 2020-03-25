@@ -1,9 +1,10 @@
 set nocompatible
 
-" if !filereadable("~/.vim/autoload/plug.vim")
-    " echo "installing vim-plug ..."
-    "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" endif
+" ~需要用expand扩展路径
+if !filereadable(expand("~/.vim/autoload/plug.vim"))
+    echo "installing vim-plug ..."
+    !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
@@ -17,7 +18,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ludovicchabant/vim-gutentags'
 " 依赖python, vim --version | grep python
 Plug 'Yggdroot/LeaderF'
-" 依赖于ack等程序
+" 依赖ack等程序
 Plug 'dyng/ctrlsf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -256,5 +257,5 @@ let g:termdebug_wide=10
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin ctrlsfj
-nmap Leader>f :CtrlSF<space>
+nmap <Leader>f :CtrlSF<space>
 
