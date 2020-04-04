@@ -10,12 +10,13 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-    " Plug 'mhinz/vim-startify'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'altercation/vim-colors-solarized'
     Plug 'majutsushi/tagbar'
-    Plug 'Lokaltog/vim-powerline'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-scripts/phd'
     Plug 'octol/vim-cpp-enhanced-highlight'
@@ -168,8 +169,10 @@ set wildmenu
 
 " 需要终端支持对应的配色方案
 " 配色方案
-set background=dark
 if has('mac')
+    " 会调用~/.vim/colors路径下
+    " 从solarized.git/vim-colors-solarized/colors/solarized.vim
+    set background=dark
     colorscheme solarized
 endif
 " 设置状态栏主题风格
@@ -257,3 +260,4 @@ nmap <Leader>f :CtrlSF<space>
 if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+let g:airline_theme='bubblegum'
