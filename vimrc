@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dyng/ctrlsf.vim'
     Plug 'jiangmiao/auto-pairs'
     " c语言lsp: brew install llvm
-    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
