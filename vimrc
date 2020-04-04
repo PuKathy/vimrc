@@ -10,7 +10,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-    Plug 'mhinz/vim-startify'
+    " Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'altercation/vim-colors-solarized'
@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dyng/ctrlsf.vim'
     Plug 'jiangmiao/auto-pairs'
     " c语言lsp: brew install llvm
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -185,7 +185,7 @@ set cursorcolumn
 
 set showcmd
 set showmode
-set nowrap
+set wrap
 set number
 " 注释掉paste，否则inoremap ( ()不起效，coc.nvim不起效
 " set paste
