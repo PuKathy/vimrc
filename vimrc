@@ -1,33 +1,34 @@
 set nocompatible
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 安装plug插件
 " ~需要用expand扩展路径
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
     echo "installing vim-plug ..."
     !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-commentary'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'altercation/vim-colors-solarized'
-Plug 'majutsushi/tagbar'
-Plug 'Lokaltog/vim-powerline'
-Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/phd'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ludovicchabant/vim-gutentags'
-" 依赖python, vim --version | grep python
-Plug 'Yggdroot/LeaderF'
-" 依赖ack等程序
-Plug 'dyng/ctrlsf.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" warning deprecated
-" indexer自动调用和更新ctags
-" indexer依赖DfrankUtil和vimprj
-" Plug 'vim-scripts/indexer.tar.gz'
-" Plug 'vim-scripts/DfrankUtil'
-" Plug 'vim-scripts/vimprj'
+    Plug 'mhinz/vim-startify'
+    Plug 'tpope/vim-commentary'
+    Plug 'bronson/vim-trailing-whitespace'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'majutsushi/tagbar'
+    Plug 'Lokaltog/vim-powerline'
+    Plug 'scrooloose/nerdtree'
+    Plug 'vim-scripts/phd'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'ludovicchabant/vim-gutentags'
+    " 依赖python, vim --version | grep python
+    Plug 'Yggdroot/LeaderF'
+    " 依赖ack等程序
+    " mac: brew install ack
+    " linux: curl https://beyondgrep.com/ack-v3.3.1 > ~/bin/ack && chmod 0755 ~/bin/ack
+    Plug 'dyng/ctrlsf.vim'
+    Plug 'jiangmiao/auto-pairs'
+    " c语言lsp: brew install llvm
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -76,7 +77,7 @@ let tagbar_sort=0
 " tagbar 子窗口中不显示冗余帮助信息
 let g:tagbar_compact=1
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
-let g:tagbar_autopreview=1
+let g:tagbar_autopreview=0
 " 设置 ctags 对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
     \ 'kinds' : [
@@ -112,21 +113,12 @@ let g:tagbar_type_cpp = {
      \ }
 \ }
 
-" warning deprecated
-" 设置插件 indexer 调用 ctags 的参数
-" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
-" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
-" let g:indexer_indexerListFilename="~/.vim/config/indexer/indexer_files"
-" let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin vim-commentary
 " 修改注释风格
 autocmd FileType python,shell set commentstring=#\ %s
 autocmd FileType c,cpp set commentstring=//\ %s
-" 自定义类型
-autocmd BufRead,BufNewFile *.cfg set filetype=core_cfg
 autocmd FileType core_cfg set commentstring=#\ %s
 
 
@@ -259,3 +251,9 @@ let g:termdebug_wide=10
 " Plugin ctrlsfj
 nmap <Leader>f :CtrlSF<space>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 文件打开，自动跳到上次浏览位置
+if has("autocmd")
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
