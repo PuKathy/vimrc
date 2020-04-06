@@ -10,6 +10,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+    Plug 'kshenoy/vim-signature'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mhinz/vim-startify'
@@ -46,6 +47,8 @@ map <leader><space> :FixWhitespace<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nmap <Leader>fl :NERDTreeToggle<CR>
+" 默认打开bookmarks
+" let NERDTreeShowBookmarks=1
 " 设置 NERDTree 子窗口宽度
 let NERDTreeWinSize=22
 " 设置 NERDTree 子窗口位置
@@ -184,7 +187,7 @@ set laststatus=2
 set ruler
 " 高亮显示当前行/列
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 
 set showcmd
 set showmode
@@ -254,6 +257,19 @@ let g:termdebug_wide=10
 " Plugin ctrlsfj
 nmap <Leader>f :CtrlSF<space>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Startify
+let g:startify_custom_header = ['Hello, this is Startify']
+let g:startify_custom_footer = []
+let g:startify_lists = [
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+          \ { 'type': 'files',     'header': ['   MRU']            },
+          \ { 'type': 'commands',  'header': ['   Commands']       },
+          \ ]
+let g:startify_files_number = 5
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.bash_profile' ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 文件打开，自动跳到上次浏览位置
@@ -261,3 +277,8 @@ if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 let g:airline_theme='bubblegum'
+let g:airline#extensions#whitespace#enabled = 0
+
+" vimrc修改立马生效
+autocmd! bufwritepost $HOME/.vimrc source %
+nmap <Leader>rc :e $HOME/.vimrc<CR>
