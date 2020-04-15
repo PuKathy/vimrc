@@ -1,4 +1,6 @@
 set nocompatible
+" copy-paste时，前后出现0~ ~1问题
+set t_BE="\e[?2004l"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 安装plug插件
@@ -50,7 +52,7 @@ nmap <Leader>fl :NERDTreeToggle<CR>
 " 默认打开bookmarks
 " let NERDTreeShowBookmarks=1
 " 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=22
+let NERDTreeWinSize=30
 " 设置 NERDTree 子窗口位置
 let NERDTreeWinPos="left"
 " 显示隐藏文件
