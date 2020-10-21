@@ -12,27 +12,28 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+    Plug 'Chiel92/vim-autoformat'
     Plug 'kshenoy/vim-signature'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
-    Plug 'bronson/vim-trailing-whitespace'
-    Plug 'altercation/vim-colors-solarized'
+    " Plug 'bronson/vim-trailing-whitespace'
+    " Plug 'altercation/vim-colors-solarized'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-scripts/phd'
     Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'ludovicchabant/vim-gutentags'
     " 依赖python, vim --version | grep python
-    Plug 'Yggdroot/LeaderF'
+    " Plug 'Yggdroot/LeaderF'
     " 依赖ack等程序
     " mac: brew install ack
     " linux: curl https://beyondgrep.com/ack-v3.3.1 > ~/bin/ack && chmod 0755 ~/bin/ack
     Plug 'dyng/ctrlsf.vim'
     Plug 'jiangmiao/auto-pairs'
     " c语言lsp: brew install llvm
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,11 +178,11 @@ set wildmenu
 if has('mac')
     " 会调用~/.vim/colors路径下
     " 从solarized.git/vim-colors-solarized/colors/solarized.vim
-    set background=dark
-    colorscheme solarized
+    " set background=dark
+    " colorscheme solarized
 endif
 " 设置状态栏主题风格
-let g:Powerline_colorscheme='solarized256'
+" let g:Powerline_colorscheme='solarized256'
 
 " 总是显示状态栏
 set laststatus=2
@@ -250,9 +251,9 @@ set splitright
 
 " Termdebug vim8.1自带的功能
 " 加载termdebug plug
-packadd termdebug
+" packadd termdebug
 " 默认水平分割，添加这个参数竖向分隔窗口
-let g:termdebug_wide=10
+" let g:termdebug_wide=10
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -270,7 +271,7 @@ let g:startify_lists = [
           \ { 'type': 'files',     'header': ['   MRU']            },
           \ { 'type': 'commands',  'header': ['   Commands']       },
           \ ]
-let g:startify_files_number = 5
+let g:startify_files_number = 20
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.bash_profile' ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -284,3 +285,9 @@ let g:airline#extensions#whitespace#enabled = 0
 " vimrc修改立马生效
 autocmd! bufwritepost $HOME/.vimrc source %
 nmap <Leader>rc :e $HOME/.vimrc<CR>
+
+noremap <F3> :Autoformat<CR>:w<CR>
+" let g:autoformat_verbosemode=1
+let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
+let g:formatters_cpp = ['allman']
+let g:formatters_c = ['allman']
