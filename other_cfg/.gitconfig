@@ -1,0 +1,17 @@
+[user]
+	email = xxx@xxx.com
+[alias]
+	co = checkout
+	ci = commit
+	br = branch
+	st = status
+[core]
+	editor = vim
+	quotepath = false
+[diff]
+	tool = meld
+[http]
+	sslVerify = false
+	postBuffer = 524288000
+[color]
+	ui = auto
