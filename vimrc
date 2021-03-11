@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
     " Plug 'bronson/vim-trailing-whitespace'
-    " Plug 'altercation/vim-colors-solarized'
+    Plug 'altercation/vim-colors-solarized'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-scripts/phd'
@@ -29,9 +29,10 @@ call plug#begin('~/.vim/plugged')
     " Plug 'Yggdroot/LeaderF'
     " 依赖ack等程序
     " mac: brew install ack
-    " linux: curl https://beyondgrep.com/ack-v3.3.1 > ~/bin/ack && chmod 0755 ~/bin/ack
+    " linux: curl https://beyondgrep.com/ack-v3.3.1 > ~/bin/ack && chmod 071010 ~/bin/ack
+    " let g:ctrlsf_ackprg=~/tool/module/tool/ack-v3.3.1_release/bin/ack;
     Plug 'dyng/ctrlsf.vim'
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
     " c语言lsp: brew install llvm
     " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
@@ -124,10 +125,10 @@ let g:tagbar_type_cpp = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin vim-commentary
 " 修改注释风格
+autocmd FileType cmake setlocal commentstring=#\ %s
 autocmd FileType python,shell set commentstring=#\ %s
 autocmd FileType c,cpp set commentstring=//\ %s
 autocmd FileType core_cfg set commentstring=#\ %s
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin vim-gutentags
@@ -182,7 +183,7 @@ if has('mac')
     " colorscheme solarized
 endif
 " 设置状态栏主题风格
-" let g:Powerline_colorscheme='solarized256'
+let g:Powerline_colorscheme='solarized2106'
 
 " 总是显示状态栏
 set laststatus=2
@@ -246,7 +247,7 @@ set splitright
 " vimgdb 目前的patch只支持到了vim7.4
 " helptags ~/.vim/vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/doc
 " run vimgdb/vimgdb-for-vim7.4/vimgdb_runtime/macros/gdb_mappings.vim
-" set previewheight=50
+" set previewheight=100
 " set splitright
 
 " Termdebug vim8.1自带的功能
@@ -288,6 +289,29 @@ nmap <Leader>rc :e $HOME/.vimrc<CR>
 
 noremap <F3> :Autoformat<CR>:w<CR>
 " let g:autoformat_verbosemode=1
-let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
+let g:formatdef_allman = '"astyle --style=google --indent-classes --break-blocks --pad-oper --pad-comma --pad-header --unpad-paren --align-pointer=name --align-reference=name --break-one-line-headers --add-braces --attach-return-type --max-code-length=200 --break-after-logical"'
 let g:formatters_cpp = ['allman']
 let g:formatters_c = ['allman']
+" let g:formatdef_my = '"clang-format -style=file"'
+" let g:formatdef_my = '"clang-format -style=linux"'
+" let g:formatters_cpp = ['my']
+" let g:formatters_c = ['my']
+
+" colorscheme https://www.jianshu.com/p/77dd73db3f89
+colorscheme elflord
+
+nmap <Leader>r+ :resize +10<CR>
+nmap <Leader>r- :resize -10<CR>
+nmap <Leader>vr+ :vertical resize -10<CR>
+nmap <Leader>vr- :vertical resize +10<CR>
+
+" opening in a new window (split):
+nnoremap gf <C-W>f
+vnoremap gf <C-W>f
+" opening in a new window (vertical split):
+nnoremap gfv <C-W>vgf
+vnoremap gfv <C-W>vgf
+" opening in a new tab:
+nnoremap gft <C-W>gf
+vnoremap gft <C-W>gf
+
