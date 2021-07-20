@@ -289,7 +289,7 @@ nmap <Leader>rc :e $HOME/.vimrc<CR>
 
 noremap <F3> :Autoformat<CR>:w<CR>
 " let g:autoformat_verbosemode=1
-let g:formatdef_allman = '"astyle --style=google --indent-classes --break-blocks --pad-oper --pad-comma --pad-header --unpad-paren --align-pointer=name --align-reference=name --break-one-line-headers --add-braces --attach-return-type --max-code-length=200 --break-after-logical"'
+let g:formatdef_allman = '"astyle --style=google --indent-classes --break-blocks --pad-oper --pad-comma --pad-header --unpad-paren --align-pointer=type --align-reference=type --break-one-line-headers --add-braces --attach-return-type --max-code-length=200 --break-after-logical"'
 let g:formatters_cpp = ['allman']
 let g:formatters_c = ['allman']
 " let g:formatdef_my = '"clang-format -style=file"'
@@ -315,3 +315,28 @@ vnoremap gfv <C-W>vgf
 nnoremap gft <C-W>gf
 vnoremap gft <C-W>gf
 
+fu! SaveSess()
+    execute 'mksession! ~/.my.session.vim'
+    execute 'wviminfo! ~/.my.session.viminfo'
+endfunction
+
+fu! RestoreSess()
+    execute 'mksession! ~/.my.session.vim'
+    execute 'wviminfo! ~/.my.session.viminfo'
+endfunction
+
+" 设置环境保存项
+set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
+" 保存 undo 历史
+set undodir=~/.undo_history/
+set undofile
+" 保存快捷键
+" map <leader>ss :mksession! ~/.my.session.vim<cr> :wviminfo! ~/my.session.viminfo<cr>
+map <leader>ss :call SaveSess() <cr>
+" 恢复快捷键
+map <leader>rs :source ~/.my.session.vim<cr> :rviminfo! ~/my.session.viminfo<cr>
+" map <leader>rs :call RestoreSess() <cr>
+
+
+autocmd VimLeave * call SaveSess()
+" autocmd VimEnter * call RestoreSess()
