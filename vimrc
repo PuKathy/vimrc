@@ -2,6 +2,16 @@ set nocompatible
 " copy-paste时，前后出现0~ ~1问题
 set t_BE="\e[?2004l"
 
+" set the runtime path to include Vundle and initialize
+" 安装:  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'babaybus/DoxygenToolkit.vim' "Plug未支持
+call vundle#end()
+
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 安装plug插件
 " ~需要用expand扩展路径
@@ -18,7 +28,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
-    " Plug 'bronson/vim-trailing-whitespace'
+    Plug 'bronson/vim-trailing-whitespace'
     Plug 'altercation/vim-colors-solarized'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
@@ -35,6 +45,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'jiangmiao/auto-pairs'
     " c语言lsp: brew install llvm
     " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'preservim/nerdcommenter'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,7 +65,7 @@ nmap <Leader>fl :NERDTreeToggle<CR>
 " 默认打开bookmarks
 " let NERDTreeShowBookmarks=1
 " 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=30
+let NERDTreeWinSize=40
 " 设置 NERDTree 子窗口位置
 let NERDTreeWinPos="left"
 " 显示隐藏文件
@@ -79,7 +90,7 @@ let g:tagbar_autofocus=1
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边
 let tagbar_right=1
 " 设置标签子窗口的宽度
-let tagbar_width=32
+let tagbar_width=50
 " 设置标签不排序，默认排序
 let tagbar_sort=0
 " tagbar 子窗口中不显示冗余帮助信息
@@ -302,8 +313,8 @@ colorscheme elflord
 
 nmap <Leader>r+ :resize +10<CR>
 nmap <Leader>r- :resize -10<CR>
-nmap <Leader>vr+ :vertical resize -10<CR>
-nmap <Leader>vr- :vertical resize +10<CR>
+nmap <Leader>vr+ :vertical resize +10<CR>
+nmap <Leader>vr- :vertical resize -10<CR>
 
 " opening in a new window (split):
 nnoremap gf <C-W>f
@@ -322,7 +333,7 @@ endfunction
 
 fu! RestoreSess()
     execute 'mksession! ~/.my.session.vim'
-    execute 'wviminfo! ~/.my.session.viminfo'
+    execute 'rviminfo! ~/.my.session.viminfo'
 endfunction
 
 " 设置环境保存项
@@ -340,3 +351,42 @@ map <leader>rs :source ~/.my.session.vim<cr> :rviminfo! ~/my.session.viminfo<cr>
 
 autocmd VimLeave * call SaveSess()
 " autocmd VimEnter * call RestoreSess()
+
+
+function! Cmain()
+    r ~/.vim/code/main.c
+endfunction
+
+function! Cppmain()
+    r ~/.vim/code/main.cpp
+endfunction
+
+nmap <Leader>c :call Cmain() <CR>
+nmap <Leader>cc :call Cppmain() <CR>
+
+
+" Plugin DoxygenToolkit
+" let g:DoxygenToolkit_commentType = "C++"
+
+let g:DoxygenToolkit_fileTag = "@file\t"
+let g:DoxygenToolkit_dateTag = "@date\t"
+let g:DoxygenToolkit_authorTag = "@author\t"
+let g:DoxygenToolkit_versionTag = "@version\t"
+let g:DoxygenToolkit_versionString = "v1.0.0"
+
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+let g:DoxygenToolkit_briefTag_pre = "@brief\t"
+let g:DoxygenToolkit_briefTag_post = "" "结尾标示
+let g:DoxygenToolkit_templateParamTag_pre = "@param\t" "函数模板
+let g:DoxygenToolkit_paramTag_pre = "@param\t"
+let g:DoxygenToolkit_returnTag = "@return\t"
+let g:DoxygenToolkit_throwTag_pre = "@throw\t"
+" let g:DoxygenToolkit_blockFooter = "***********" "用于函数，不是文件头
+
+let g:DoxygenToolkit_blockTag = "@name\t"
+let g:DoxygenToolkit_classTag = "@class\t"
+let g:DoxygenToolkit_authorName = "kaifei.pu"
+let g:doxygen_enhanced_color = 1
+let g:load_doxygen_syntax = 1
+map <leader>d :Dox <cr>
+map <leader>da :DoxAuthor <cr>
