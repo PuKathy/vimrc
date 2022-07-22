@@ -4,10 +4,13 @@ set t_BE="\e[?2004l"
 
 " set the runtime path to include Vundle and initialize
 " 安装:  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" plug.vim不支持的插件
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'babaybus/DoxygenToolkit.vim' "Plug未支持
+    Plugin 'babaybus/DoxygenToolkit.vim' "功能：注释
+	Plugin 'godlygeek/tabular'
+	Plugin 'plasticboy/vim-markdown'
 call vundle#end()
 
 
@@ -206,7 +209,7 @@ set cursorline
 
 set showcmd
 set showmode
-set wrap
+set nowrap
 set number
 " 注释掉paste，否则inoremap ( ()不起效，coc.nvim不起效
 " set paste
@@ -300,7 +303,7 @@ nmap <Leader>rc :e $HOME/.vimrc<CR>
 
 noremap <F3> :Autoformat<CR>:w<CR>
 " let g:autoformat_verbosemode=1
-let g:formatdef_allman = '"astyle --style=google --indent-classes --break-blocks --pad-oper --pad-comma --pad-header --unpad-paren --align-pointer=type --align-reference=type --break-one-line-headers --add-braces --attach-return-type --max-code-length=200 --break-after-logical"'
+let g:formatdef_allman = '"astyle --style=google --indent-switches --attach-namespaces --indent-classes --break-blocks --pad-oper --pad-comma --pad-header --unpad-paren --align-pointer=type --align-reference=type --break-one-line-headers --add-braces --attach-return-type --max-code-length=200 --break-after-logical"'
 let g:formatters_cpp = ['allman']
 let g:formatters_c = ['allman']
 " let g:formatdef_my = '"clang-format -style=file"'
@@ -362,7 +365,7 @@ function! Cppmain()
 endfunction
 
 nmap <Leader>c :call Cmain() <CR>
-nmap <Leader>cc :call Cppmain() <CR>
+nmap <Leader>cpp :call Cppmain() <CR>
 
 
 " Plugin DoxygenToolkit
@@ -390,3 +393,29 @@ let g:doxygen_enhanced_color = 1
 let g:load_doxygen_syntax = 1
 map <leader>d :Dox <cr>
 map <leader>da :DoxAuthor <cr>
+
+" edit %h<Tab> 打开当前文件所在目录下其他文件
+" 简化为：命令行输入%%
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
+set undolevels=5000
+
+" 最大化当前窗口/关闭当前最大化窗口
+function! Zoom ()
+    " check if is the zoomed state (tabnumber > 1 && window == 1)
+    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+        let l:cur_winview = winsaveview()
+        let l:cur_bufname = bufname('')
+        tabclose
+
+        " restore the view
+        if l:cur_bufname == bufname('')
+            call winrestview(cur_winview)
+        endif
+    else
+        tab split
+    endif
+endfunction
+
+nmap <leader>z :call Zoom()<CR>
